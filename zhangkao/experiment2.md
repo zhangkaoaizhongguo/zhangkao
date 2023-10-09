@@ -126,11 +126,11 @@ Python变量、简单数据类型和列表简介
 
 ```mermaid
 flowchart LR
-    A[Start] --> B{Is it?}
-    B -->|Yes| C[OK]
-    C --> D[Rethink]
-    D --> B
-    B ---->|No| E[End]
+    A[Start] --> B{Is it?};
+    B -->|Yes| C[OK];
+    C --> D[Rethink];
+    D --> B;
+    B ---->|No| E[End];
 ```
 
 查看Mermaid流程图语法-->[点击这里](https://mermaid.js.org/syntax/flowchart.html)
@@ -212,24 +212,24 @@ def even_or_odd(number):
 
 ```mermaid
 flowchart LR
- A[一个数开平方] --> B{等于它开平方取整}
- B -->|YES|C[ok]
- C -->D[返回这个数自己的平方]
- B -->|NO|E[NOT]
- E -->F[返回这个数开根号取整的平方]
+ A[一个数开平方] --> B{等于它开平方取整};
+ B -->|YES|C[ok];
+ C -->D[返回这个数自己的平方];
+ B -->|NO|E[NOT];
+ E -->F[返回这个数开根号取整的平方];
 ```
 
 第二题Bouncing Balls(弹跳的小球)
 
 ```mermaid
 flowchart LR
-A[seen = -1] --> B{0 < bounce < 1}
+A[seen = -1] --> B{0 < bounce < 1};
 B -->|YES|C[seen += 2
-            h *= bounce]
-C -->F{h > window > 0}
-F -->|YES|C
-F -->|NO|E
-B -->|NO|E[return seen]
+            h *= bounce];
+C -->F{h > window > 0};
+F -->|YES|C;
+F -->|NO|E;
+B -->|NO|E[return seen];
 
 ```
 
@@ -237,21 +237,19 @@ B -->|NO|E[return seen]
 
 ```mermaid
 flowchart LR
-A[S] -->B{aeiouAEIOU}
-B -->|YES|C[sum 1 for let in inputStr]
-B -->|NO|D[0]
-C -->E[return sum]
+A[S] -->B{aeiouAEIOU};
+B -->|YES|C[sum 1 for let in inputStr];
+B -->|NO|D[0];
+C -->E[return sum];
 ```
 
 第四题Even or Odd
 
 ```mermaid
 flowchart LR
-A[number] -->B{% 2 == 0}
-B -->|YES|C[Even]
-B -->|NO|D[Odd]
-
-
+A[number] -->B{% 2 == 0};
+B -->|YES|C[Even];
+B -->|NO|D[Odd];
 
 ```
 

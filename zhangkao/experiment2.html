@@ -454,14 +454,14 @@ code {
 <li>Mermaid Markdown Syntax Highlighting</li>
 </ul>
 <p>使用Markdown语法绘制你的程序绘制程序流程图（至少一个），Markdown代码如下：</p>
-<p>![程序流程图]</p>
+<h2 id="%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B%E5%9B%BE">[程序流程图]</h2>
 <p>显示效果如下：</p>
 <pre><code class="language-mermaid"><div class="mermaid">flowchart LR
-    A[Start] --> B{Is it?}
-    B -->|Yes| C[OK]
-    C --> D[Rethink]
-    D --> B
-    B ---->|No| E[End]
+    A[Start] --> B{Is it?};
+    B -->|Yes| C[OK];
+    C --> D[Rethink];
+    D --> B;
+    B ---->|No| E[End];
 </div></code></pre>
 <p>查看Mermaid流程图语法--&gt;<a href="https://mermaid.js.org/syntax/flowchart.html">点击这里</a></p>
 <p>使用Markdown编辑器（例如VScode）编写本次实验的实验报告，包括<a href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E4%B8%8E%E7%BB%93%E6%9E%9C">实验过程与结果</a>、<a href="#%E5%AE%9E%E9%AA%8C%E8%80%83%E6%9F%A5">实验考查</a>和<a href="#%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93">实验总结</a>，并将其导出为 <strong>PDF格式</strong> 来提交。</p>
@@ -516,37 +516,35 @@ Vowel Count</p>
 <p>显示效果如下:
 第一题Find Nearest square number(找到最近的平方数)</p>
 <pre><code class="language-mermaid"><div class="mermaid">flowchart LR
- A[一个数开平方] --> B{等于它开平方取整}
- B -->|YES|C[ok]
- C -->D[返回这个数自己的平方]
- B -->|NO|E[NOT]
- E -->F[返回这个数开根号取整的平方]
+ A[一个数开平方] --> B{等于它开平方取整};
+ B -->|YES|C[ok];
+ C -->D[返回这个数自己的平方];
+ B -->|NO|E[NOT];
+ E -->F[返回这个数开根号取整的平方];
 </div></code></pre>
 <p>第二题Bouncing Balls(弹跳的小球)</p>
 <pre><code class="language-mermaid"><div class="mermaid">flowchart LR
-A[seen = -1] --> B{0 < bounce < 1}
+A[seen = -1] --> B{0 < bounce < 1};
 B -->|YES|C[seen += 2
-            h *= bounce]
-C -->F{h > window > 0}
-F -->|YES|C
-F -->|NO|E
-B -->|NO|E[return seen]
+            h *= bounce];
+C -->F{h > window > 0};
+F -->|YES|C;
+F -->|NO|E;
+B -->|NO|E[return seen];
 
 </div></code></pre>
 <p>第三题Vowel Count(元音统计)</p>
 <pre><code class="language-mermaid"><div class="mermaid">flowchart LR
-A[S] -->B{aeiouAEIOU}
-B -->|YES|C[sum 1 for let in inputStr]
-B -->|NO|D[0]
-C -->E[return sum]
+A[S] -->B{aeiouAEIOU};
+B -->|YES|C[sum 1 for let in inputStr];
+B -->|NO|D[0];
+C -->E[return sum];
 </div></code></pre>
 <p>第四题Even or Odd</p>
 <pre><code class="language-mermaid"><div class="mermaid">flowchart LR
-A[number] -->B{% 2 == 0}
-B -->|YES|C[Even]
-B -->|NO|D[Odd]
-
-
+A[number] -->B{% 2 == 0};
+B -->|YES|C[Even];
+B -->|NO|D[Odd];
 
 </div></code></pre>
 <p><strong>注意：不要使用截图，Markdown文档转换为Pdf格式后，截图可能会无法显示。</strong></p>
