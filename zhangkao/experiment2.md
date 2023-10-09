@@ -6,9 +6,9 @@
 
 姓名： 张靠
 
-Github地址：<https://github.com/yourusername/python_course>
+Github地址：<https://github.com/zhangkaoaizhongguo/zhangkao.git>
 
-CodeWars地址：<https://www.codewars.com/users/yourusername>
+CodeWars地址：<https://www.codewars.com/users/zhangkao>
 
 ---
 
@@ -160,13 +160,47 @@ git commit -m "first commit"
 
 如果是Python代码，应该使用下面代码块格式，例如：
 
-![Python代码]
+## [Python题目代码]
 
-显示效果如下：
+练习第一题显示效果如下：
+Find Nearest square number
 
 ```python
-def add_binary(a,b):
-    return bin(a+b)[2:]
+def nearest_sq(n):
+    return round(n ** 0.5) ** 2
+```
+
+练习第二题显示效果如下：
+Bouncing Balls
+
+```python
+def bouncingBall(h, bounce, window):
+    seen = -1
+    
+    if 0 < bounce < 1:
+        while h > window > 0:
+            seen += 2
+            h *= bounce
+    
+    return seen
+```
+
+练习第三题显示效果如下：
+Vowel Count
+
+```python
+def getCount(inputStr):
+    return sum(1 for let in inputStr if let in "aeiouAEIOU")
+```
+
+练习第四题显示效果如下：Even or Odd
+
+```python
+def even_or_odd(number):
+  if number % 2 == 0:
+    return "Even"
+  else:
+    return "Odd"
 ```
 
 代码运行结果的文本可以直接粘贴在这里。
@@ -174,11 +208,11 @@ def add_binary(a,b):
 
 显示效果如下:
 第一题
+
 ```mermaid
 flowchart LR
  A
 ```
-
 
 **注意：不要使用截图，Markdown文档转换为Pdf格式后，截图可能会无法显示。**
 
@@ -189,6 +223,13 @@ flowchart LR
 1. Python中的简单数据类型有那些？我们可以对这些数据类型做哪些操作？
 2. 为什么说Python中的变量都是标签？
 3. 有哪些方法可以提高Python代码的可读性？
+
+## 我的解答
+
+ 1. Python中的数字类型包含整型、浮点型和复数类型。布尔类型是特殊的整型，它的值只有两个，分别是True和False。如果将布尔值进行数值运算，True会被当作整型1，False会被当作整型0。Python 中的字符串被定义为一个字符集合，它被引号所包含，引号可以是单引号、双引号或者三引号(三个连续的单引号或者双引号)。字符串具有索引规则，第1个字符的索引是0，第2个字符的索引是1，以此类推。我们可以将列表和元组当作是普通的“数组”，它们可以保存任意数量的任意类型的 值，这些值称作元素。列表中的元素使用中括号[]包含，元素的个数和值是可以随意修改的。而元组中的元素使用小括号()包含，元素不可以被修改。字典是Python中的映射数据类型，由键-值对组成。字典可以存储不同类型的元素，元素使用大括号{}来包含。通常情况下，字典的键会以字符串或者数值的形式来表示，而值可以是任意类型。
+ 2. Python 里的变量，与其说是装数据的容器，倒不如说是贴在数据上的标签。 变量并不占用空间，占用空间的是数据本身。 当你重新赋值时，就相当于撕下这个标签，贴纸另一个数据上。
+ 3. 1.代码布局缩进。标准Python风格中每个缩进级别使用4个空格，不推荐使用Tab，禁止混用空格与Tab。
+行的最大长度。每行最大长度79，换行可以使用反斜杠，但建议使用圆括号。空白行。顶层函数和定义的类之间空两行，类中的方法定义之间空一行；函数内逻辑无关的代码段之间空一行，其他地方尽量不要空行。2.空格的使用右括号前不要加空格。逗号、冒号分号前不要加空格。函数的左括号前不要加空格，如fun（1）。序列的左括号前不要加空格，如list[2]。操作符左右各加一个空格，如a+b=c。不要将多条语句写在同一行。if、for、while语句中,即使执行语句只有一句，也必须另起一行。3.代码注释块注释。块注释跟随被注释的代码，缩进至与代码相同的级别。块注释使用“#”开头。行内注释。行内注释是与代码语句同行的注释。行内注释与代码至少由两个空格分隔，注释以“#”开头。文档字符串。文档字符串指的是为所有公共模块、函数、类以及方法编写的文档说明。文档字符串使用三引号包裹4.命名规范不要使用字母“I”（L的小写）、“0”（大写0）、“I”（大写I）作为单字符变量名。模块名、包名应简短且全为小写。函数名应该小写，如果想提高可读性，可以用下画线分隔小写单词。类名首字母一般使用大写。常量通常采用全大写命名。
 
 ## 实验总结
 
