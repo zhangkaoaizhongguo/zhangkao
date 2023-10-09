@@ -224,11 +224,13 @@ flowchart LR
 ```mermaid
 flowchart LR
 A[seen = -1] --> B{0 < bounce < 1};
-B -->|YES|C[seen += 2
+B -->|YES|C{h > window > 0};
+C -->F[seen += 2
             h *= bounce];
-C -->F{h > window > 0};
-F -->|YES|C;
-F -->|NO|E;
+
+F -->f{h > window > 0};
+f-->|YES|C;
+f-->|NO|E;
 B -->|NO|E[return seen];
 
 ```
@@ -250,6 +252,7 @@ flowchart LR
 A[number] -->B{% 2 == 0};
 B -->|YES|C[Even];
 B -->|NO|D[Odd];
+
 
 ```
 
