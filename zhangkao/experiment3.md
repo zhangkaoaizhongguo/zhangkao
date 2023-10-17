@@ -6,9 +6,9 @@
 
 姓名： 张靠
 
-Github地址：<https://github.com/yourusername/python_course>
+Github地址：<git@github.com:zhangkaoaizhongguo/zhangkao.git>
 
-CodeWars地址：<https://www.codewars.com/users/yourusername>
+CodeWars地址：<https://www.codewars.com/users/zhangkao>
 
 ---
 
