@@ -8,7 +8,7 @@
 
 Github地址：<git@github.com:zhangkaoaizhongguo/zhangkao.git>
 
-CodeWars地址：<https://www.codewars.com/users/zhangkao>
+CodeWars地址：<https://www.codewars.com/users/master%20Link>
 
 ---
 
@@ -226,6 +226,13 @@ def add_binary(a,b):
 第一题：停止逆转我的单词
 
 ```python
+def spin_words(sentence):
+    output = []
+    for word in sentence.split(' '):
+        if len(word) > 4:
+            word = word[::-1]
+        output.append(word)
+    return ' '.join(output)
 
 ```
 
@@ -285,7 +292,26 @@ def validate_sudoku(x):
 第五题： 疯狂的彩色三角形
 
 ```python
-
+def triangle(row):
+    row = [char for char in row]
+    lenght = len(row)
+    new_my_dict = {"RR": "R", "BB": "B", "GG": "G", "RG": "B", "GR": "B", "RB": "G", "BR": "G", "BG": "R", "GB": "R"}
+    while lenght > 9:
+        if (lenght - 1) % 9 != 0:
+            while (lenght - 1) % 9 != 0:
+                for i in range(len(row) - 1):
+                row[i] = new_my_dict[row[i] + row[i + 1]]
+                row.pop()
+                lenght -= 1
+                temp = []
+            for i in range(0, lenght - 1, 9):
+            temp.append(new_my_dict[row[i] + row[i + 9]])
+        row = temp
+        lenght = (lenght - 1) // 9       
+    for _ in range(lenght - 1):
+        for i in range(len(row) - 1): row[i] = new_my_dict[row[i] + row[i + 1]]
+           row.pop()
+    return row[0]
 ```
 
 ## 第二部分 使用Mermaid绘制程序流程图
@@ -294,6 +320,22 @@ def validate_sudoku(x):
 
 ```mermaid
 flowchart LR
+A[output]
+B[for word in sentence.split ' ']
+C{len word > 4}
+D[ return ' '.join output]
+E[word = word ::-1]
+F[END]
+G[output.append word]
+A-->B
+B-->C
+B--|END FOR|-->D
+C--|YES|-->E
+C--|NO|-->G
+E-->G
+G-->B
+D-->F
+
 ```
 
 第二题：发现离群的数(Find The Parity Outlier)
@@ -344,17 +386,84 @@ E-->F
 
 ```
 
-第四题：数独解决方案验证
+第四题：数独解决方案验证 
 
 ```mermaid
 flowchart LR
-A
-
+A[pri = 0,2,3,5,7,11,13,17,19,23]
+B[for i in range 9]
+C[ for j in range 9]
+D[c = pri x ij]
+E{c == 0}
+F[ index = i//3*3 + j//3
+            row i *= c
+            col j *= c
+            cen index *= c
+            c = c*c]
+G[return False]
+H{ rowi%c*col j %c*cen index%c == 0}
+I[return False]
+J[return True]
+K[END]
+A-->B
+B-->C
+C--|END FOR|-->B
+B--|END FOR|-->J
+C-->D
+D-->E
+E--|YES|-->G
+E--|NO|-->F
+F-->H
+H--|YES|-->I
+I-->K
+G-->K
+J-->K
 ```
 
 第五题：疯狂的彩色三角形
 
 ```mermaid
+flowchart LR
+A[row = char for char in row lenght = len row
+new_my_dict ]
+B{lenght > 9}
+C{lenght - 1 % 9 != 0}
+D[ _ in range lenght - 1]
+E{lenght - 1 % 9 != 0}
+F[i in range len row - 1]
+G[return row 0]
+H[for i in range len row - 1]
+I[temp = ]
+J[row i = new_my_dictrow i + row i + 1]
+K[row.pop]
+L[END]
+M[row i = new_my_dictrow i + row i + 1]
+N[row.pop lenght -= 1]
+O[for i in range 0, lenght - 1, 9]
+P[temp.appendnew_my_dict row i + row i + 9]
+Q[row = temp lenght = lenght - 1 // 9]
+A-->B
+B--|YES|-->C
+B--|NO|-->D
+C--|YES|-->E
+C--|NO|-->I
+D-->F
+D-->G
+E--|YES|-->H
+E--|NO|-->I
+F-->G
+F--|END FOR|-->K
+G-->L
+H-->M
+H--|END FOR|-->N
+I-->O
+J-->F
+K-->D
+M-->H
+N--E
+O-->P
+O--|END FOR|-->Q
+Q-->B
 
 ```
 
@@ -365,10 +474,71 @@ A
 请使用自己的语言并使用尽量简短代码示例回答下面的问题，这些问题将在实验检查时用于提问和答辩以及实际的操作。
 
 1. 集合（set）类型有什么特点？它和列表（list）类型有什么区别？
+
+    答：集合（set）类型是一种无序的、不重复的数据结构，它的特点是：
+        集合中的元素是唯一的，不会重复出现。
+        集合中的元素是无序的，不能通过下标来访问集合中的元素。
+        列表（list）类型是一种有序的、可重复的数据结构，它的特点是：
+        列表中的元素是有序的，可以通过下标来访问列表中的元素。
+        列表中的元素是可重复的，同一个元素可以出现多次。
+        因此，集合和列表在存储数据和访问数据的方式上有很大的区别。
+
 2. 集合（set）类型主要有那些操作？
+
+    答：1.初始化一个集合：可以使用{}或者set()函数来初始化一个集合。
+        2.集合的运算操作：包括并集（|）、交集（&）、差集（-）和对称差集（^）。
+        3.集合的基本方法：包括add()、remove()、discard()、pop()、clear()等方法。
+        4.集合的比较操作：包括issubset()、issuperset()、isdisjoint()等方法。
+        5.集合的其他操作：包括len()、in、not in等操作。
+
 3. 使用`*`操作符作用到列表上会产生什么效果？为什么不能使用`*`操作符作用到嵌套的列表上？使用简单的代码示例说明。
-4. 总结列表,集合，字典的解析（comprehension）的使用方法。使用简单的代码示例说明。
+ 
+     答：使用*操作符作用到列表上会将列表中的元素解包，变成函数参数传递给函数。例如，可以使用*操作符将列表中的元素传递给函数作为位置参数，或者将字典中的键传递给函数作为关键字参数。但是，不能使用*操作符作用到嵌套的列表上，因为这样会导致解包出来的元素无法正确地传递给函数。
+        以下是一个简单的代码示例：
+
+ ```python
+            # 使用 * 操作符将列表中的元素传递给函数
+        def my_func(a, b, c):
+            print(a, b, c)
+
+        my_list = [1, 2, 3]
+        my_func(*my_list)  # 输出：1 2 3
+
+            # 不能使用 * 操作符将嵌套的列表传递给函数
+        nested_list = [[1, 2], [3, 4]]
+        my_func(*nested_list)  # 报错：TypeError: my_func() takes 3 positional arguments but 4 were given
+```
+
+5. 总结列表,集合，字典的解析（comprehension）的使用方法。使用简单的代码示例说明。
+   
+   答：列表解析（List Comprehension）是一种简洁的创建列表的方法，它可以通过一个表达式和一个可迭代对象来创建一个新的列表。下面是一个简单的示例代码：
+
+```python
+         # 创建一个包含1到10的平方数的列表
+         squares = [x**2 for x in range(1, 11)]
+         print(squares)
+```
+
+输出结果为：[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+集合解析（Set Comprehension）与列表解析类似，只不过它创建的是一个集合。下面是一个简单的示例代码：
+
+```python
+      # 创建一个包含1到10的平方数的集合
+        squares_set = {x**2 for x in range(1, 11)}
+        print(squares_set)
+```
+
+输出结果为：{64, 1, 4, 36, 100, 9, 16, 49, 81, 25}
+字典解析（Dictionary Comprehension）是一种创建字典的方法，它可以通过一个表达式和一个可迭代对象来创建一个新的字典。下面是一个简单的示例代码：
+
+```python
+      # 创建一个包含1到10的平方数的字典
+        squares_dict = {x: x**2 for x in range(1, 11)}
+        print(squares_dict)
+```
+
+输出结果为：{1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100}
 
 ## 实验总结
 
-总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。
+这次学习了python中的数据结构和数据模型，学会了使用集合和列表，也明白了集合和列表之间的区别，集合中的元素是唯一的，不会重复出现。 集合中的元素是无序的，不能通过下标来访问集合中的元素。
