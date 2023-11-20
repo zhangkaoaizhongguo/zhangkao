@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>experiment6.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E5%AE%9E%E9%AA%8C%E5%85%AD-python%E5%87%BD%E6%95%B0">实验六 Python函数</h1>
+<p>班级： 21计科1</p>
+<p>学号： B20210301117</p>
+<p>姓名： 张靠</p>
+<p>Github地址：&lt;git@github.com:zhangkaoaizhongguo/zhangkao.git&gt;</p>
+<p>CodeWars地址：<a href="https://www.codewars.com/users/master%20Link">https://www.codewars.com/users/master Link</a></p>
+<hr>
+<h2 id="%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84">实验目的</h2>
+<ol>
+<li>学习Python函数的基本用法</li>
+<li>学习lambda函数和高阶函数的使用</li>
+<li>掌握函数式编程的概念和实践</li>
+</ol>
+<h2 id="%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83">实验环境</h2>
+<ol>
+<li>Git</li>
+<li>Python 3.10</li>
+<li>VSCode</li>
+<li>VSCode插件</li>
+</ol>
+<h2 id="%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9%E5%92%8C%E6%AD%A5%E9%AA%A4">实验内容和步骤</h2>
+<h3 id="%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86">第一部分</h3>
+<p>Python函数</p>
+<p>完成教材《Python编程从入门到实践》下列章节的练习：</p>
+<ul>
+<li>第8章 函数</li>
+</ul>
+<hr>
+<h3 id="%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86">第二部分</h3>
+<p>在<a href="https://www.codewars.com">Codewars网站</a>注册账号，完成下列Kata挑战：</p>
+<hr>
+<h4 id="%E7%AC%AC%E4%B8%80%E9%A2%98%E7%BC%96%E7%A0%81%E8%81%9A%E4%BC%9A1">第一题：编码聚会1</h4>
+<p>难度： 7kyu</p>
+<p>你将得到一个字典数组，代表关于首次报名参加你所组织的编码聚会的开发者的数据。
+你的任务是返回来自欧洲的JavaScript开发者的数量。
+例如，给定以下列表：</p>
+<pre class="hljs"><code><div>lst1 = [
+  { <span class="hljs-string">'firstName'</span>: <span class="hljs-string">'Noah'</span>, <span class="hljs-string">'lastName'</span>: <span class="hljs-string">'M.'</span>, <span class="hljs-string">'country'</span>: <span class="hljs-string">'Switzerland'</span>, <span class="hljs-string">'continent'</span>: <span class="hljs-string">'Europe'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">19</span>, <span class="hljs-string">'language'</span>: <span class="hljs-string">'JavaScript'</span> },
+  { <span class="hljs-string">'firstName'</span>: <span class="hljs-string">'Maia'</span>, <span class="hljs-string">'lastName'</span>: <span class="hljs-string">'S.'</span>, <span class="hljs-string">'country'</span>: <span class="hljs-string">'Tahiti'</span>, <span class="hljs-string">'continent'</span>: <span class="hljs-string">'Oceania'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">28</span>, <span class="hljs-string">'language'</span>: <span class="hljs-string">'JavaScript'</span> },
+  { <span class="hljs-string">'firstName'</span>: <span class="hljs-string">'Shufen'</span>, <span class="hljs-string">'lastName'</span>: <span class="hljs-string">'L.'</span>, <span class="hljs-string">'country'</span>: <span class="hljs-string">'Taiwan'</span>, <span class="hljs-string">'continent'</span>: <span class="hljs-string">'Asia'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">35</span>, <span class="hljs-string">'language'</span>: <span class="hljs-string">'HTML'</span> },
+  { <span class="hljs-string">'firstName'</span>: <span class="hljs-string">'Sumayah'</span>, <span class="hljs-string">'lastName'</span>: <span class="hljs-string">'M.'</span>, <span class="hljs-string">'country'</span>: <span class="hljs-string">'Tajikistan'</span>, <span class="hljs-string">'continent'</span>: <span class="hljs-string">'Asia'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">30</span>, <span class="hljs-string">'language'</span>: <span class="hljs-string">'CSS'</span> }
+]
+</div></code></pre>
+<p>你的函数应该返回数字1。
+如果，没有来自欧洲的JavaScript开发人员，那么你的函数应该返回0。</p>
+<p>注意：
+字符串的格式将总是&quot;Europe&quot;和&quot;JavaScript&quot;。
+所有的数据将始终是有效的和统一的，如上面的例子。</p>
+<p>这个卡塔是Coding Meetup系列的一部分，其中包括一些简短易行的卡塔，这些卡塔是为了让人们掌握高阶函数的使用。在Python中，这些方法包括：<code>filter</code>, <code>map</code>, <code>reduce</code>。当然也可以采用其他方法来解决这些卡塔。</p>
+<p><a href="https://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe">代码提交地址</a></p>
+<hr>
+<h4 id="%E7%AC%AC%E4%BA%8C%E9%A2%98-%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0%E8%BF%9B%E8%A1%8C%E8%AE%A1%E7%AE%97">第二题： 使用函数进行计算</h4>
+<p>难度：5kyu</p>
+<p>这次我们想用函数来写计算，并得到结果。让我们看一下一些例子：</p>
+<pre class="hljs"><code><div>seven(times(five())) <span class="hljs-comment"># must return 35</span>
+four(plus(nine())) <span class="hljs-comment"># must return 13</span>
+eight(minus(three())) <span class="hljs-comment"># must return 5</span>
+six(divided_by(two())) <span class="hljs-comment"># must return 3</span>
+</div></code></pre>
+<p>要求：</p>
+<ul>
+<li>从0（&quot;零&quot;）到9（&quot;九&quot;）的每个数字都必须有一个函数。</li>
+<li>必须有一个函数用于以下数学运算：加、减、乘、除。</li>
+<li>每个计算都由一个操作和两个数字组成。</li>
+<li>最外面的函数代表左边的操作数，最里面的函数代表右边的操作数。</li>
+<li>除法应该是整数除法。</li>
+</ul>
+<p>例如，下面的计算应该返回2，而不是2.666666...。</p>
+<pre class="hljs"><code><div>eight(divided_by(three()))
+</div></code></pre>
+<p>代码提交地址：
+<a href="https://www.codewars.com/kata/525f3eda17c7cd9f9e000b39">https://www.codewars.com/kata/525f3eda17c7cd9f9e000b39</a></p>
+<hr>
+<h4 id="%E7%AC%AC%E4%B8%89%E9%A2%98-%E7%BC%A9%E7%9F%AD%E6%95%B0%E5%80%BC%E7%9A%84%E8%BF%87%E6%BB%A4%E5%99%A8number-shortening-filter">第三题： 缩短数值的过滤器(Number Shortening Filter)</h4>
+<p>难度：6kyu</p>
+<p>在这个kata中，我们将创建一个函数，它返回另一个缩短长数字的函数。给定一个初始值数组替换给定基数的 X 次方。如果返回函数的输入不是数字字符串，则应将输入本身作为字符串返回。</p>
+<p>例子：</p>
+<pre class="hljs"><code><div>filter1 = shorten_number([<span class="hljs-string">''</span>,<span class="hljs-string">'k'</span>,<span class="hljs-string">'m'</span>],<span class="hljs-number">1000</span>)
+filter1(<span class="hljs-string">'234324'</span>) == <span class="hljs-string">'234k'</span>
+filter1(<span class="hljs-string">'98234324'</span>) == <span class="hljs-string">'98m'</span>
+filter1([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]) == <span class="hljs-string">'[1,2,3]'</span>
+filter2 = shorten_number([<span class="hljs-string">'B'</span>,<span class="hljs-string">'KB'</span>,<span class="hljs-string">'MB'</span>,<span class="hljs-string">'GB'</span>],<span class="hljs-number">1024</span>)
+filter2(<span class="hljs-string">'32'</span>) == <span class="hljs-string">'32B'</span>
+filter2(<span class="hljs-string">'2100'</span>) == <span class="hljs-string">'2KB'</span>;
+filter2(<span class="hljs-string">'pippi'</span>) == <span class="hljs-string">'pippi'</span>
+</div></code></pre>
+<p>代码提交地址：
+<a href="https://www.codewars.com/kata/56b4af8ac6167012ec00006f">https://www.codewars.com/kata/56b4af8ac6167012ec00006f</a></p>
+<hr>
+<h4 id="%E7%AC%AC%E5%9B%9B%E9%A2%98-%E7%BC%96%E7%A0%81%E8%81%9A%E4%BC%9A7">第四题： 编码聚会7</h4>
+<p>难度： 6kyu</p>
+<p>您将获得一个对象序列，表示已注册参加您组织的下一个编程聚会的开发人员的数据。</p>
+<p>您的任务是返回一个序列，其中包括最年长的开发人员。如果有多个开发人员年龄相同，则将他们按照在原始输入数组中出现的顺序列出。</p>
+<p>例如，给定以下输入数组：</p>
+<pre class="hljs"><code><div>list1 = [
+  { <span class="hljs-string">'firstName'</span>: <span class="hljs-string">'Gabriel'</span>, <span class="hljs-string">'lastName'</span>: <span class="hljs-string">'X.'</span>, <span class="hljs-string">'country'</span>: <span class="hljs-string">'Monaco'</span>, <span class="hljs-string">'continent'</span>: <span class="hljs-string">'Europe'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">49</span>, <span class="hljs-string">'language'</span>: <span class="hljs-string">'PHP'</span> },
+  { <span class="hljs-string">'firstName'</span>: <span class="hljs-string">'Odval'</span>, <span class="hljs-string">'lastName'</span>: <span class="hljs-string">'F.'</span>, <span class="hljs-string">'country'</span>: <span class="hljs-string">'Mongolia'</span>, <span class="hljs-string">'continent'</span>: <span class="hljs-string">'Asia'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">38</span>, <span class="hljs-string">'language'</span>: <span class="hljs-string">'Python'</span> },
+  { <span class="hljs-string">'firstName'</span>: <span class="hljs-string">'Emilija'</span>, <span class="hljs-string">'lastName'</span>: <span class="hljs-string">'S.'</span>, <span class="hljs-string">'country'</span>: <span class="hljs-string">'Lithuania'</span>, <span class="hljs-string">'continent'</span>: <span class="hljs-string">'Europe'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">19</span>, <span class="hljs-string">'language'</span>: <span class="hljs-string">'Python'</span> },
+  { <span class="hljs-string">'firstName'</span>: <span class="hljs-string">'Sou'</span>, <span class="hljs-string">'lastName'</span>: <span class="hljs-string">'B.'</span>, <span class="hljs-string">'country'</span>: <span class="hljs-string">'Japan'</span>, <span class="hljs-string">'continent'</span>: <span class="hljs-string">'Asia'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">49</span>, <span class="hljs-string">'language'</span>: <span class="hljs-string">'PHP'</span> },
+]
+</div></code></pre>
+<p>您的程序应该返回如下结果：</p>
+<pre class="hljs"><code><div>[
+  { <span class="hljs-string">'firstName'</span>: <span class="hljs-string">'Gabriel'</span>, <span class="hljs-string">'lastName'</span>: <span class="hljs-string">'X.'</span>, <span class="hljs-string">'country'</span>: <span class="hljs-string">'Monaco'</span>, <span class="hljs-string">'continent'</span>: <span class="hljs-string">'Europe'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">49</span>, <span class="hljs-string">'language'</span>: <span class="hljs-string">'PHP'</span> },
+  { <span class="hljs-string">'firstName'</span>: <span class="hljs-string">'Sou'</span>, <span class="hljs-string">'lastName'</span>: <span class="hljs-string">'B.'</span>, <span class="hljs-string">'country'</span>: <span class="hljs-string">'Japan'</span>, <span class="hljs-string">'continent'</span>: <span class="hljs-string">'Asia'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">49</span>, <span class="hljs-string">'language'</span>: <span class="hljs-string">'PHP'</span> },
+]
+</div></code></pre>
+<p>注意：</p>
+<ul>
+<li>输入的列表永远都包含像示例中一样有效的正确格式的数据，而且永远不会为空。</li>
+</ul>
+<p>代码提交地址：
+<a href="https://www.codewars.com/kata/582887f7d04efdaae3000090">https://www.codewars.com/kata/582887f7d04efdaae3000090</a></p>
+<hr>
+<h4 id="%E7%AC%AC%E4%BA%94%E9%A2%98-currying-versus-partial-application">第五题： Currying versus partial application</h4>
+<p>难度： 4kyu</p>
+<p><a href="https://2ality.com/2011/09/currying-vs-part-eval.html">Currying versus partial application</a>是将一个函数转换为具有更小arity(参数更少)的另一个函数的两种方法。虽然它们经常被混淆，但它们的工作方式是不同的。目标是学会区分它们。</p>
+<p>Currying</p>
+<p>是一种将接受多个参数的函数转换为以每个参数都只接受一个参数的一系列函数链的技术。</p>
+<p>Currying接受一个函数：</p>
+<pre class="hljs"><code><div>f：X × Y → R
+</div></code></pre>
+<p>并将其转换为一个函数：</p>
+<pre class="hljs"><code><div><span class="hljs-string">f'：X → (Y → R)
+</span></div></code></pre>
+<p>我们不再使用两个参数调用f，而是使用第一个参数调用f'。结果是一个函数，然后我们使用第二个参数调用该函数来产生结果。因此，如果非curried f被调用为：</p>
+<pre class="hljs"><code><div>f(<span class="hljs-number">3</span>, <span class="hljs-number">5</span>)
+</div></code></pre>
+<p>那么curried f'被调用为：</p>
+<pre class="hljs"><code><div><span class="hljs-string">f'(3)(5)
+</span></div></code></pre>
+<p>示例
+给定以下函数：</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span><span class="hljs-params">(x, y, z)</span>:</span>
+  <span class="hljs-keyword">return</span> x + y + z
+</div></code></pre>
+<p>我们可以以普通方式调用：</p>
+<pre class="hljs"><code><div>add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt; 6</span>
+</div></code></pre>
+<p>但我们可以创建一个curried版本的add(a, b, c)函数：</p>
+<pre class="hljs"><code><div>curriedAdd = <span class="hljs-keyword">lambda</span> a: (<span class="hljs-keyword">lambda</span> b: (<span class="hljs-keyword">lambda</span> c: add(a,b,c)))
+curriedAdd(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt; 6</span>
+</div></code></pre>
+<p>Partial application
+是将一定数量的参数固定到函数中，从而产生另一个更小arity(参数更少)的函数的过程。</p>
+<p>部分应用接受一个函数：</p>
+<pre class="hljs"><code><div>f：X × Y → R
+</div></code></pre>
+<p>和一个固定值x作为第一个参数，以产生一个新的函数</p>
+<pre class="hljs"><code><div><span class="hljs-string">f'：Y → R
+</span></div></code></pre>
+<p>f'与f执行的操作相同，但只需要填写第二个参数，这就是其arity比f的arity少一个的原因。可以说第一个参数绑定到x。</p>
+<p>示例:</p>
+<pre class="hljs"><code><div>partialAdd = <span class="hljs-keyword">lambda</span> a: (<span class="hljs-keyword">lambda</span> *args: add(a,*args))
+partialAdd(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt; 6</span>
+</div></code></pre>
+<p>你的任务是实现一个名为curryPartial()的通用函数，可以进行currying或部分应用。</p>
+<p>例如：</p>
+<pre class="hljs"><code><div>curriedAdd = curryPartial(add)
+curriedAdd(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt; 6</span>
+
+partialAdd = curryPartial(add, <span class="hljs-number">1</span>)
+partialAdd(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt; 6</span>
+</div></code></pre>
+<p>我们希望函数保持灵活性。</p>
+<p>所有下面这些例子都应该产生相同的结果：</p>
+<pre class="hljs"><code><div>curryPartial(add)(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6 </span>
+curryPartial(add, <span class="hljs-number">1</span>)(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6 </span>
+curryPartial(add, <span class="hljs-number">1</span>)(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6 </span>
+curryPartial(add, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)(<span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6 </span>
+curryPartial(add, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6 </span>
+curryPartial(add)(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6 </span>
+curryPartial(add)(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)(<span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6 </span>
+curryPartial(add)()(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6 </span>
+curryPartial(add)()(<span class="hljs-number">1</span>)()()(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6 </span>
+
+curryPartial(add)()(<span class="hljs-number">1</span>)()()(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>) <span class="hljs-comment"># =&gt;6 </span>
+curryPartial(add, <span class="hljs-number">1</span>)(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>) <span class="hljs-comment"># =&gt;6 </span>
+
+curryPartial(curryPartial(curryPartial(add, <span class="hljs-number">1</span>), <span class="hljs-number">2</span>), <span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6</span>
+curryPartial(curryPartial(add, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>), <span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6</span>
+curryPartial(curryPartial(add, <span class="hljs-number">1</span>), <span class="hljs-number">2</span>, <span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6</span>
+curryPartial(curryPartial(add, <span class="hljs-number">1</span>), <span class="hljs-number">2</span>)(<span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6</span>
+curryPartial(curryPartial(add, <span class="hljs-number">1</span>)(<span class="hljs-number">2</span>), <span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6</span>
+curryPartial(curryPartial(curryPartial(add, <span class="hljs-number">1</span>)), <span class="hljs-number">2</span>, <span class="hljs-number">3</span>) <span class="hljs-comment"># =&gt;6</span>
+</div></code></pre>
+<p>代码提交地址：
+<a href="https://www.codewars.com/kata/53cf7e37e9876c35a60002c9">https://www.codewars.com/kata/53cf7e37e9876c35a60002c9</a></p>
+<hr>
+<h3 id="%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86">第三部分</h3>
+<p>使用Mermaid绘制程序流程图</p>
+<p>安装VSCode插件：</p>
+<ul>
+<li>Markdown Preview Mermaid Support</li>
+<li>Mermaid Markdown Syntax Highlighting</li>
+</ul>
+<p>使用Markdown语法绘制你的程序绘制程序流程图（至少一个），Markdown代码如下：</p>
+<p><img src="/Experiments/img/2023-08-05-22-00-00.png" alt="程序流程图"></p>
+<p>显示效果如下：</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+    A[Start] --> B{Is it?}
+    B -->|Yes| C[OK]
+    C --> D[Rethink]
+    D --> B
+    B ---->|No| E[End]
+</div></code></pre>
+<p>查看Mermaid流程图语法--&gt;<a href="https://mermaid.js.org/syntax/flowchart.html">点击这里</a></p>
+<p>使用Markdown编辑器（例如VScode）编写本次实验的实验报告，包括<a href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E4%B8%8E%E7%BB%93%E6%9E%9C">实验过程与结果</a>、<a href="#%E5%AE%9E%E9%AA%8C%E8%80%83%E6%9F%A5">实验考查</a>和<a href="#%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93">实验总结</a>，并将其导出为 <strong>PDF格式</strong> 来提交。</p>
+<h2 id="%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E4%B8%8E%E7%BB%93%E6%9E%9C">实验过程与结果</h2>
+<p>请将实验过程与结果放在这里，包括：</p>
+<ul>
+<li><a href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86">第一部分 Python函数</a></li>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86">第二部分 Codewars Kata挑战</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86">第三部分 使用Mermaid绘制程序流程图</a></li>
+</ul>
+<p>注意代码需要使用markdown的代码块格式化，例如Git命令行语句应该使用下面的格式：</p>
+<p><img src="/Experiments/img/2023-07-26-22-48.png" alt="Git命令"></p>
+<p>显示效果如下：</p>
+<pre class="hljs"><code><div>git init
+git add .
+git status
+git commit -m <span class="hljs-string">"first commit"</span>
+</div></code></pre>
+<p>如果是Python代码，应该使用下面代码块格式，例如：</p>
+<p><img src="/Experiments/img/2023-07-26-22-52-20.png" alt="Python代码"></p>
+<p>显示效果如下：</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_binary</span><span class="hljs-params">(a,b)</span>:</span>
+    <span class="hljs-keyword">return</span> bin(a+b)[<span class="hljs-number">2</span>:]
+</div></code></pre>
+<p>代码运行结果的文本可以直接粘贴在这里。</p>
+<h2 id="%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-codewars-kata%E6%8C%91%E6%88%98">第一部分 Codewars Kata挑战</h2>
+<p>第一题：编码聚会1(Coding Meetup #1 - Higher-Order Functions Series - Count the number of JavaScript developers coming from Europe)</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">count_developers</span><span class="hljs-params">(lst)</span>:</span>
+    n_d = <span class="hljs-number">0</span>  
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(lst)): 
+        <span class="hljs-keyword">if</span> lst[i][<span class="hljs-string">'continent'</span>] == <span class="hljs-string">'Europe'</span>: 
+            <span class="hljs-keyword">if</span> lst[i][<span class="hljs-string">'language'</span>] == <span class="hljs-string">'JavaScript'</span>:   
+                n_d += <span class="hljs-number">1</span>  
+    <span class="hljs-keyword">return</span> n_d 
+</div></code></pre>
+<p>第二题：使用函数进行计算(Calculating with Functions)</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">zero</span><span class="hljs-params">(operation=None)</span>:</span>
+    <span class="hljs-keyword">return</span> operation(<span class="hljs-number">0</span>) <span class="hljs-keyword">if</span> operation <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">one</span><span class="hljs-params">(operation=None)</span>:</span>
+    <span class="hljs-keyword">return</span> operation(<span class="hljs-number">1</span>) <span class="hljs-keyword">if</span> operation <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">two</span><span class="hljs-params">(operation=None)</span>:</span>
+    <span class="hljs-keyword">return</span> operation(<span class="hljs-number">2</span>) <span class="hljs-keyword">if</span> operation <span class="hljs-keyword">else</span> <span class="hljs-number">2</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">three</span><span class="hljs-params">(operation=None)</span>:</span>
+    <span class="hljs-keyword">return</span> operation(<span class="hljs-number">3</span>) <span class="hljs-keyword">if</span> operation <span class="hljs-keyword">else</span> <span class="hljs-number">3</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">four</span><span class="hljs-params">(operation=None)</span>:</span>
+    <span class="hljs-keyword">return</span> operation(<span class="hljs-number">4</span>) <span class="hljs-keyword">if</span> operation <span class="hljs-keyword">else</span> <span class="hljs-number">4</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">five</span><span class="hljs-params">(operation=None)</span>:</span>
+    <span class="hljs-keyword">return</span> operation(<span class="hljs-number">5</span>) <span class="hljs-keyword">if</span> operation <span class="hljs-keyword">else</span> <span class="hljs-number">5</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">six</span><span class="hljs-params">(operation=None)</span>:</span>
+    <span class="hljs-keyword">return</span> operation(<span class="hljs-number">6</span>) <span class="hljs-keyword">if</span> operation <span class="hljs-keyword">else</span> <span class="hljs-number">6</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">seven</span><span class="hljs-params">(operation=None)</span>:</span>
+    <span class="hljs-keyword">return</span> operation(<span class="hljs-number">7</span>) <span class="hljs-keyword">if</span> operation <span class="hljs-keyword">else</span> <span class="hljs-number">7</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">eight</span><span class="hljs-params">(operation=None)</span>:</span>
+    <span class="hljs-keyword">return</span> operation(<span class="hljs-number">8</span>) <span class="hljs-keyword">if</span> operation <span class="hljs-keyword">else</span> <span class="hljs-number">8</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">nine</span><span class="hljs-params">(operation=None)</span>:</span>
+    <span class="hljs-keyword">return</span> operation(<span class="hljs-number">9</span>) <span class="hljs-keyword">if</span> operation <span class="hljs-keyword">else</span> <span class="hljs-number">9</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">plus</span><span class="hljs-params">(y)</span>:</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">lambda</span> x: x + y
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minus</span><span class="hljs-params">(y)</span>:</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">lambda</span> x: x - y
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">times</span><span class="hljs-params">(y)</span>:</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">lambda</span> x: x * y
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dividedBy</span><span class="hljs-params">(y)</span>:</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">lambda</span> x: x // y
+
+result1 = seven(times(five()))  <span class="hljs-comment"># 应返回 35</span>
+result2 = four(plus(nine()))    <span class="hljs-comment"># 应返回 13</span>
+result3 = eight(minus(three()))  <span class="hljs-comment"># 应返回 5</span>
+result4 = six(dividedBy(two()))  <span class="hljs-comment"># 应返回 3</span>
+
+print(result1, result2, result3, result4)
+
+</div></code></pre>
+<p>第三题： 缩短数值的过滤器(Number Shortening Filter)</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">shorten_number</span><span class="hljs-params">(suffixes, base)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fileter</span><span class="hljs-params">(x)</span>:</span>
+        index = <span class="hljs-number">0</span>
+        <span class="hljs-keyword">try</span>:
+            x = int(x)
+        <span class="hljs-keyword">except</span>: 
+            <span class="hljs-keyword">return</span> str(x)
+        <span class="hljs-keyword">while</span> int(x/base) &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> index &lt; len(suffixes)<span class="hljs-number">-1</span>:
+            index = index+<span class="hljs-number">1</span>
+            x = int(x/base)
+        <span class="hljs-keyword">return</span> str(x) + suffixes[index]
+    <span class="hljs-keyword">return</span> fileter
+</div></code></pre>
+<p>第四题： 编码聚会7 (Coding Meetup #7 - Higher-Order Functions Series - Find the most senior developer)</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_senior</span><span class="hljs-params">(lst)</span>:</span>    
+    mage = max(a[<span class="hljs-string">'age'</span>] <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> lst)
+    <span class="hljs-keyword">return</span> [a <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> lst <span class="hljs-keyword">if</span> a[<span class="hljs-string">'age'</span>]==mage]
+</div></code></pre>
+<p>第五题： Currying versus partial application</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> partial, wraps
+<span class="hljs-keyword">from</span> inspect <span class="hljs-keyword">import</span> signature
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">curry_partial</span><span class="hljs-params">(f, *initial_args)</span>:</span>
+    <span class="hljs-string">"Curries and partially applies the initial arguments to the function"</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> callable(f):
+        <span class="hljs-keyword">return</span> f
+
+    n = len(signature(f).parameters)
+    <span class="hljs-keyword">if</span> n &lt;= len(initial_args):
+        <span class="hljs-keyword">return</span> f(*initial_args[:n])
+
+    g = partial(f, *initial_args)
+    
+<span class="hljs-meta">    @wraps(g)</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">h</span><span class="hljs-params">(*args)</span>:</span>
+        <span class="hljs-keyword">return</span> curry_partial(g, *args)
+    <span class="hljs-keyword">return</span> h
+
+</div></code></pre>
+<h2 id="%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86-%E4%BD%BF%E7%94%A8mermaid%E7%BB%98%E5%88%B6%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B%E5%9B%BE">第二部分 使用Mermaid绘制程序流程图</h2>
+<p>第一题：编码聚会1(Coding Meetup #1 - Higher-Order Functions Series - Count the number of JavaScript developers coming from Europe)</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+A[n_d = 0 ]
+B[for word in sentence.split ' ']
+C{len word > 4}
+D[ return ' '.join output]
+E[word = word ::-1]
+F[END]
+G[output.append word]
+A-->B
+B-->C
+B--|END FOR|-->D
+C--|YES|-->E
+C--|NO|-->G
+E-->G
+G-->B
+D-->F
+
+</div></code></pre>
+<p>第二题：使用函数进行计算(Calculating with Functions)</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+ A[开始] -->|接受参数a| B[定义identity函数]
+B -->|返回a| C[返回a]
+A -->|接受可选参数f默认为identity| D[定义zero函数]
+D -->|使用f对0进行操作| E[调用f0]
+E --> F[返回结果]
+D --> F
+A --> G[定义one函数]
+G -->|使用f对1进行操作| H[调用f1]
+H --> I[返回结果]
+G --> I
+F --> J[结束]
+I --> J
+J --> K[定义plus函数]
+K -->|接受参数b| L[返回lambda函数: lambda a: a + b]
+J --> L
+K --> M[定义minus函数]
+M -->|接受参数b| N[返回lambda函数: lambda a: a - b]
+J --> N
+K --> O[定义times函数]
+O -->|接受参数b| P[返回lambda函数: lambda a: a * b]
+J --> P
+K --> Q[定义divided_by函数]
+Q -->|接受参数b| R[返回lambda函数: lambda a: a // b]
+J --> R
+
+</div></code></pre>
+<p>第三题：缩短数值的过滤器(Number Shortening Filter)</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+
+  A[开始] -->|接受suffixes和base参数| B[定义filter_function]
+  B -->|接受数字参数x| C{能否将x转换为整数?}
+  C -->|是| D[将x转换为整数]
+  C -->|否| E[返回字符串x]
+  D --> F[初始化index为0]
+  F -->|x是否大于等于base且index小于suffixes长度减1| G{条件满足吗?}
+  G -->|是| H[递增index]
+  G -->|否| I[计算x除以base并更新x]
+  H --> F  
+  I --> G  
+  G -->|条件不再满足| J[返回strx + suffixesindex]
+  J --> K[结束]
+
+ 
+
+
+</div></code></pre>
+<p>第四题：编码聚会7 (Coding Meetup #7 - Higher-Order Functions Series - Find the most senior developer)</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+
+  A[开始] -->|接受包含字典的列表lst| B{找到最高年龄mage}
+  B -->|使用生成器表达式找到所有年龄| C[生成器表达式: a'age' for a in lst]
+  C --> D[使用max函数找到最大值mage]
+  D -->|使用列表推导式找到最高年龄的字典| E[列表推导式: a for a in lst if a'age' == mage]
+  E --> F[返回包含最高年龄的字典的列表]
+  F --> G[结束]
+
+</div></code></pre>
+<p>第五题：Currying versus partial application</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+A[开始]
+B{f是否可调用?}
+C[获取函数f的参数个数n]
+E[返回f]
+D[返回f被初始参数部分应用后的结果]
+F[创建部分应用的函数g]
+G[定义递归函数h]
+H[返回递归函数h]
+I[结束]
+A -->|initial_args| B
+B --|yes|-->C
+B --|no|-->E
+C -->|n <= args| D
+C -->|n >args| F
+F --> G
+G --|curry_partial|--> B
+F -->H
+D --> H
+E --> H
+H --> I
+
+
+</div></code></pre>
+<p><strong>注意：不要使用截图，Markdown文档转换为Pdf格式后，截图可能会无法显示。</strong></p>
+<h2 id="%E5%AE%9E%E9%AA%8C%E8%80%83%E6%9F%A5">实验考查</h2>
+<p>请使用自己的语言并使用尽量简短代码示例回答下面的问题，这些问题将在实验检查时用于提问和答辩以及实际的操作。</p>
+<ol>
+<li>什么是函数式编程范式？</li>
+<li>什么是lambda函数？请举例说明。</li>
+<li>什么是高阶函数？常用的高阶函数有哪些？这些高阶函数如何工作？使用简单的代码示例说明。</li>
+</ol>
+<h2 id="%E6%88%91%E7%9A%84%E5%9B%9E%E7%AD%94">我的回答</h2>
+<ol>
+<li>
+<p>函数式编程范式是一种编程范式，它将计算视为数学函数的计算，避免使用可变的数据和状态。函数式编程强调函数的纯粹性和不可变性，并且通常采用一系列数学概念，如高阶函数、递归、lambda演算等。
+以下是函数式编程范式的一些主要特点：
+纯函数： 纯函数是指函数的输出完全由输入决定，而且函数执行过程中没有副作用。相同的输入始终产生相同的输出，不依赖外部状态，不改变全局状态。
+不可变性： 函数式编程强调数据的不可变性，即一旦数据被创建，就不能被修改。如果需要对数据进行更改，应该创建一个新的数据副本而不是修改原始数据。
+高阶函数： 函数可以作为参数传递给其他函数，也可以作为返回值。高阶函数是函数式编程的一个关键概念，它使得编程变得更加抽象和灵活。
+递归： 函数式编程通常使用递归而不是循环来进行迭代。递归是一种自我引用的方法，它可以用于解决许多问题，并与函数式编程的不可变性和纯函数性相契合。
+引用透明性： 表示一个表达式可以被它的值替代而不改变程序的行为。这使得程序更容易理解和推理，因为函数调用不依赖于外部状态。
+惰性求值： 只有在需要的时候才计算表达式的值。这有助于提高程序的性能，因为只有在真正需要结果时才进行计算。
+模块化： 函数式编程鼓励将程序分解为小的、可重用的函数，这有助于构建模块化和易于维护的代码。
+函数式编程范式的一些编程语言，以及在一定程度上支持函数式编程的语言，如JavaScript和Python，都在不同程度上应用了这些特点。函数式编程的优点包括代码简洁、易于理解、并行化的便利性等。然而，它也可能需要程序员适应一些与传统命令式编程不同的思维方式。</p>
+</li>
+<li>
+<p>Lambda函数是一种匿名函数，也称为lambda表达式。它是一种在编程中创建小型、临时的、一次性的函数的方式，通常用于需要传递函数作为参数的情况。
+在许多编程语言中，lambda函数通常只有一行，用于执行简单的操作。Lambda函数的语法通常包括关键字lambda，参数列表，冒号(<img class="emoji" alt="smiley" src="data:image/png;base64,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" />，以及函数体。下面是一个简单的lambda函数的通用形式：</p>
+</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-comment"># 使用lambda定义一个匿名函数，计算两个数的和</span>
+add = <span class="hljs-keyword">lambda</span> x, y: x + y
+
+<span class="hljs-comment"># 调用lambda函数</span>
+result = add(<span class="hljs-number">3</span>, <span class="hljs-number">5</span>)
+
+<span class="hljs-comment"># 输出结果</span>
+print(result)  <span class="hljs-comment"># 输出 8</span>
+
+</div></code></pre>
+<p>在这个例子中，lambda函数接受两个参数 x 和 y，并返回它们的和。lambda函数赋值给变量 add，然后可以像普通函数一样调用。这里，add(3, 5) 返回 8。
+ambda函数通常用于函数式编程中的高阶函数，例如在 map、filter、sorted 等函数中作为参数传递。以下是一个使用lambda函数的例子：</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 使用lambda函数将列表中的每个元素平方</span>
+numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+squared_numbers = list(map(<span class="hljs-keyword">lambda</span> x: x**<span class="hljs-number">2</span>, numbers))
+
+<span class="hljs-comment"># 输出结果</span>
+print(squared_numbers)  <span class="hljs-comment"># 输出 [1, 4, 9, 16, 25]</span>
+
+</div></code></pre>
+<p>在这个例子中，map 函数将lambda函数应用于列表中的每个元素，将每个元素平方，最终得到 squared_numbers 列表。</p>
+<ol start="3">
+<li>高阶函数是指可以接受一个或多个函数作为参数，并/或者返回一个函数作为结果的函数。在函数式编程中，高阶函数是一种强大的工具，它们可以用来抽象通用的模式，使代码更加简洁和灵活。常用的高阶函数包括 map、filter、reduce 等。</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce
+
+<span class="hljs-comment"># 使用reduce函数计算列表中所有元素的累积和</span>
+numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+sum_result = reduce(<span class="hljs-keyword">lambda</span> x, y: x + y, numbers)
+<span class="hljs-comment"># 输出结果：15</span>
+
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># 使用sorted函数对列表进行升序排序</span>
+numbers = [<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">9</span>, <span class="hljs-number">2</span>, <span class="hljs-number">6</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>]
+sorted_numbers = sorted(numbers)
+<span class="hljs-comment"># 输出结果：[1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]</span>
+
+</div></code></pre>
+<p>这些高阶函数通常通过将函数作为参数传递给它们来工作，或者返回一个函数作为结果。这种方式允许我们更灵活地操作数据，通过传递不同的函数实现不同的逻辑。
+使用高阶函数的优点之一是可以将代码编写得更简洁，通过传递函数作为参数，可以提高代码的可读性和复用性。</p>
+<h2 id="%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93">实验总结</h2>
+<p>在这次实验中，我提供了关于函数式编程的解释，包括函数式编程范式的特点、lambda函数的概念以及高阶函数的介绍。同时，我还强调了函数式编程中纯函数、不可变性等重要概念。与之前提到的总结相比，这里强调了一些不同的方面：
+函数式编程范式的突出：
+重点强调了函数式编程范式的核心特点，如纯函数、不可变性等，突显了它与传统命令式编程的区别。
+突出函数式编程的思想：
+更强调了函数式编程的思想，包括通过纯函数和不可变性来减少副作用，以及利用高阶函数实现模块化和灵活的代码结构。
+数据结构和算法的强调：
+虽然在具体示例中没有涉及复杂的数据结构和算法，但函数式编程通常与一些特定的数据结构（如不可变数据结构）和算法（如尾递归）相关联。
+与传统编程范式的对比：
+强调了函数式编程与传统命令式编程的区别，特别是在对待状态和数据的方式上，更加注重不可变性和函数的纯粹性。
+总体而言，这次总结更加突出了函数式编程范式的独特性和思想，以及它与传统编程方式的差异。这样的总结有助于理解函数式编程的核心概念，并对编写更清晰、易于维护的代码有更深层次的认识。</p>
+
+</body>
+</html>
