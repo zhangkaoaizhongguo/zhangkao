@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>experiment5.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E5%AE%9E%E9%AA%8C%E4%BA%94-python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B">实验五 Python数据结构与数据模型</h1>
+<p>班级： 21计科1</p>
+<p>学号：B2021301117</p>
+<p>姓名： 张靠</p>
+<p>Github地址：&lt;git@github.com:zhangkaoaizhongguo/zhangkao.git&gt;</p>
+<p>CodeWars地址：<a href="https://www.codewars.com/users/master%20Link">https://www.codewars.com/users/master Link</a></p>
+<hr>
+<h2 id="%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84">实验目的</h2>
+<ol>
+<li>学习Python数据结构的高级用法</li>
+<li>学习Python的数据模型</li>
+</ol>
+<h2 id="%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83">实验环境</h2>
+<ol>
+<li>Git</li>
+<li>Python 3.10</li>
+<li>VSCode</li>
+<li>VSCode插件</li>
+</ol>
+<h2 id="%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9%E5%92%8C%E6%AD%A5%E9%AA%A4">实验内容和步骤</h2>
+<h3 id="%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86">第一部分</h3>
+<p>在<a href="https://www.codewars.com">Codewars网站</a>注册账号，完成下列Kata挑战：</p>
+<hr>
+<h4 id="%E7%AC%AC%E4%B8%80%E9%A2%98%E5%81%9C%E6%AD%A2%E9%80%86%E8%BD%AC%E6%88%91%E7%9A%84%E5%8D%95%E8%AF%8D">第一题：停止逆转我的单词</h4>
+<p>难度： 6kyu</p>
+<p>编写一个函数，接收一个或多个单词的字符串，并返回相同的字符串，但所有5个或更多的字母单词都是相反的（就像这个Kata的名字一样）。传入的字符串将只由字母和空格组成。只有当出现一个以上的单词时，才会包括空格。
+例如：</p>
+<pre class="hljs"><code><div>spinWords( <span class="hljs-string">"Hey fellow warriors"</span> ) =&gt; returns <span class="hljs-string">"Hey wollef sroirraw"</span> 
+spinWords( <span class="hljs-string">"This is a test"</span>) =&gt; returns <span class="hljs-string">"This is a test"</span> 
+spinWords( <span class="hljs-string">"This is another test"</span> )=&gt; returns <span class="hljs-string">"This is rehtona test"</span>
+</div></code></pre>
+<p>代码提交地址：
+<a href="https://www.codewars.com/kata/5264d2b162488dc400000001">https://www.codewars.com/kata/5264d2b162488dc400000001</a></p>
+<p>提示：</p>
+<ul>
+<li>利用str的split方法可以将字符串分为单词列表
+例如：</li>
+</ul>
+<pre class="hljs"><code><div>words = <span class="hljs-string">"hey fellow warrior"</span>.split()
+<span class="hljs-comment"># words should be ['hey', 'fellow', 'warrior']</span>
+</div></code></pre>
+<ul>
+<li>利用列表推导将长度大于等于5的单词反转(利用切片word[::-1])</li>
+<li>最后使用str的join方法连结列表中的单词。</li>
+</ul>
+<hr>
+<h4 id="%E7%AC%AC%E4%BA%8C%E9%A2%98-%E5%8F%91%E7%8E%B0%E7%A6%BB%E7%BE%A4%E7%9A%84%E6%95%B0find-the-parity-outlier">第二题： 发现离群的数(Find The Parity Outlier)</h4>
+<p>难度：6kyu</p>
+<p>给你一个包含整数的数组（其长度至少为3，但可能非常大）。该数组要么完全由奇数组成，要么完全由偶数组成，除了一个整数N。请写一个方法，以该数组为参数，返回这个 &quot;离群 &quot;的N。</p>
+<p>例如：</p>
+<pre class="hljs"><code><div>[<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">0</span>, <span class="hljs-number">100</span>, <span class="hljs-number">4</span>, <span class="hljs-number">11</span>, <span class="hljs-number">2602</span>, <span class="hljs-number">36</span>]
+<span class="hljs-comment"># Should return: 11 (the only odd number)</span>
+
+[<span class="hljs-number">160</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1719</span>, <span class="hljs-number">19</span>, <span class="hljs-number">11</span>, <span class="hljs-number">13</span>, <span class="hljs-number">-21</span>]
+<span class="hljs-comment"># Should return: 160 (the only even number)</span>
+</div></code></pre>
+<p>代码提交地址：
+<a href="https://www.codewars.com/kata/5526fc09a1bbd946250002dc">https://www.codewars.com/kata/5526fc09a1bbd946250002dc</a></p>
+<hr>
+<h4 id="%E7%AC%AC%E4%B8%89%E9%A2%98-%E6%A3%80%E6%B5%8Bpangram">第三题： 检测Pangram</h4>
+<p>难度：6kyu</p>
+<p>pangram是一个至少包含每个字母一次的句子。例如，&quot;The quick brown fox jumps over the lazy dog &quot;这个句子就是一个pangram，因为它至少使用了一次字母A-Z（大小写不相关）。</p>
+<p>给定一个字符串，检测它是否是一个pangram。如果是则返回<code>True</code>，如果不是则返回<code>False</code>。忽略数字和标点符号。
+代码提交地址：
+<a href="https://www.codewars.com/kata/545cedaa9943f7fe7b000048">https://www.codewars.com/kata/545cedaa9943f7fe7b000048</a></p>
+<hr>
+<h4 id="%E7%AC%AC%E5%9B%9B%E9%A2%98-%E6%95%B0%E7%8B%AC%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E9%AA%8C%E8%AF%81">第四题： 数独解决方案验证</h4>
+<p>难度：6kyu</p>
+<p>数独背景</p>
+<p>数独是一种在 9x9 网格上进行的游戏。游戏的目标是用 1 到 9 的数字填充网格的所有单元格，以便每一列、每一行和九个 3x3 子网格（也称为块）中的都包含数字 1 到 9。更多信息请访问：<a href="http://en.wikipedia.org/wiki/Sudoku">http://en.wikipedia.org/wiki/Sudoku</a></p>
+<p>编写一个函数接受一个代表数独板的二维数组，如果它是一个有效的解决方案则返回 true，否则返回 false。数独板的单元格也可能包含 0，这将代表空单元格。包含一个或多个零的棋盘被认为是无效的解决方案。棋盘总是 9 x 9 格，每个格只包含 0 到 9 之间的整数。</p>
+<p>代码提交地址：
+<a href="https://www.codewars.com/kata/63d1bac72de941033dbf87ae">https://www.codewars.com/kata/63d1bac72de941033dbf87ae</a></p>
+<hr>
+<h4 id="%E7%AC%AC%E4%BA%94%E9%A2%98-%E7%96%AF%E7%8B%82%E7%9A%84%E5%BD%A9%E8%89%B2%E4%B8%89%E8%A7%92%E5%BD%A2">第五题： 疯狂的彩色三角形</h4>
+<p>难度： 2kyu</p>
+<p>一个彩色的三角形是由一排颜色组成的，每一排都是红色、绿色或蓝色。连续的几行，每一行都比上一行少一种颜色，是通过考虑前一行中的两个相接触的颜色而产生的。如果这些颜色是相同的，那么新的一行就使用相同的颜色。如果它们不同，则在新的一行中使用缺失的颜色。这个过程一直持续到最后一行，只有一种颜色被生成。</p>
+<p>例如：</p>
+<pre class="hljs"><code><div>Colour here:            G G        B G        R G        B R
+Becomes colour here:     G          R          B          G
+</div></code></pre>
+<p>一个更大的三角形例子：</p>
+<pre class="hljs"><code><div>R R G B R G B B
+ R B R G B R B
+  G G B R G G
+   G R G B G
+    B B R R
+     B G R
+      R B
+       G
+</div></code></pre>
+<p>你将得到三角形的第一行字符串，你的工作是返回最后的颜色，这将出现在最下面一行的字符串。在上面的例子中，你将得到 &quot;RRGBRGBB&quot;，你应该返回 &quot;G&quot;。
+限制条件： 1 &lt;= length(row) &lt;= 10 ** 5
+输入的字符串将只包含大写字母'B'、'G'或'R'。</p>
+<p>例如：</p>
+<pre class="hljs"><code><div>triangle(<span class="hljs-string">'B'</span>) == <span class="hljs-string">'B'</span>
+triangle(<span class="hljs-string">'GB'</span>) == <span class="hljs-string">'R'</span>
+triangle(<span class="hljs-string">'RRR'</span>) == <span class="hljs-string">'R'</span>
+triangle(<span class="hljs-string">'RGBG'</span>) == <span class="hljs-string">'B'</span>
+triangle(<span class="hljs-string">'RBRGBRB'</span>) == <span class="hljs-string">'G'</span>
+triangle(<span class="hljs-string">'RBRGBRBGGRRRBGBBBGG'</span>) == <span class="hljs-string">'G'</span>
+</div></code></pre>
+<p>代码提交地址：
+<a href="https://www.codewars.com/kata/5a331ea7ee1aae8f24000175">https://www.codewars.com/kata/5a331ea7ee1aae8f24000175</a></p>
+<p>提示：请参考下面的链接，利用三进制的特点来进行计算。
+<a href="https://stackoverflow.com/questions/53585022/three-colors-triangles">https://stackoverflow.com/questions/53585022/three-colors-triangles</a></p>
+<hr>
+<h3 id="%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86">第二部分</h3>
+<p>使用Mermaid绘制程序流程图</p>
+<p>安装VSCode插件：</p>
+<ul>
+<li>Markdown Preview Mermaid Support</li>
+<li>Mermaid Markdown Syntax Highlighting</li>
+</ul>
+<p>使用Markdown语法绘制你的程序绘制程序流程图（至少一个），Markdown代码如下：</p>
+<p><img src="/Experiments/img/2023-08-05-22-00-00.png" alt="程序流程图"></p>
+<p>显示效果如下：</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+    A[Start] --> B{Is it?}
+    B -->|Yes| C[OK]
+    C --> D[Rethink]
+    D --> B
+    B ---->|No| E[End]
+</div></code></pre>
+<p>查看Mermaid流程图语法--&gt;<a href="https://mermaid.js.org/syntax/flowchart.html">点击这里</a></p>
+<p>使用Markdown编辑器（例如VScode）编写本次实验的实验报告，包括<a href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E4%B8%8E%E7%BB%93%E6%9E%9C">实验过程与结果</a>、<a href="#%E5%AE%9E%E9%AA%8C%E8%80%83%E6%9F%A5">实验考查</a>和<a href="#%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93">实验总结</a>，并将其导出为 <strong>PDF格式</strong> 来提交。</p>
+<h2 id="%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E4%B8%8E%E7%BB%93%E6%9E%9C">实验过程与结果</h2>
+<p>请将实验过程与结果放在这里，包括：</p>
+<ul>
+<li><a href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86">第一部分 Codewars Kata挑战</a></li>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86">第二部分 使用Mermaid绘制程序流程图</a></li>
+</ul>
+<p>注意代码需要使用markdown的代码块格式化，例如Git命令行语句应该使用下面的格式：</p>
+<p><img src="/Experiments/img/2023-07-26-22-48.png" alt="Git命令"></p>
+<p>显示效果如下：</p>
+<pre class="hljs"><code><div>git init
+git add .
+git status
+git commit -m <span class="hljs-string">"first commit"</span>
+</div></code></pre>
+<p>如果是Python代码，应该使用下面代码块格式，例如：</p>
+<p><img src="/Experiments/img/2023-07-26-22-52-20.png" alt="Python代码"></p>
+<p>显示效果如下：</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_binary</span><span class="hljs-params">(a,b)</span>:</span>
+    <span class="hljs-keyword">return</span> bin(a+b)[<span class="hljs-number">2</span>:]
+</div></code></pre>
+<p>代码运行结果的文本可以直接粘贴在这里。</p>
+<h2 id="%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-codewars-kata%E6%8C%91%E6%88%98">第一部分 Codewars Kata挑战</h2>
+<p>第一题：停止逆转我的单词</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">spin_words</span><span class="hljs-params">(sentence)</span>:</span>
+    output = []
+    <span class="hljs-keyword">for</span> word <span class="hljs-keyword">in</span> sentence.split(<span class="hljs-string">' '</span>):
+        <span class="hljs-keyword">if</span> len(word) &gt; <span class="hljs-number">4</span>:
+            word = word[::<span class="hljs-number">-1</span>]
+        output.append(word)
+    <span class="hljs-keyword">return</span> <span class="hljs-string">' '</span>.join(output)
+
+</div></code></pre>
+<p>第二题： 发现离群的数(Find The Parity Outlier)</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_outlier</span><span class="hljs-params">(integers)</span>:</span>
+ evens = []
+ odds = []
+<span class="hljs-keyword">for</span> each <span class="hljs-keyword">in</span> integers:
+<span class="hljs-keyword">if</span> each%<span class="hljs-number">2</span>==<span class="hljs-number">0</span>:
+evens.append(each)
+<span class="hljs-keyword">else</span>:
+odds.append(each)
+<span class="hljs-keyword">if</span> len(evens)&gt;<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> len(odds)==<span class="hljs-number">1</span>:
+<span class="hljs-keyword">return</span> odds[<span class="hljs-number">0</span>]
+<span class="hljs-keyword">elif</span> len(odds)&gt;<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> len(evens)==<span class="hljs-number">1</span>:
+<span class="hljs-keyword">return</span> evens[<span class="hljs-number">0</span>]
+</div></code></pre>
+<p>第三题： 检测Pangram</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> string
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_pangram</span><span class="hljs-params">(string)</span>:</span>
+    alphabet = <span class="hljs-string">'abcdefghijklmnopqrstuvwhyz'</span>   
+    <span class="hljs-keyword">for</span> letter <span class="hljs-keyword">in</span> alphabet:
+        <span class="hljs-keyword">if</span> letter <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> string.lower():
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
+</div></code></pre>
+<p>第四题： 数独解决方案验证 (Sudoku board validator)</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">validate_sudoku</span><span class="hljs-params">(x)</span>:</span>
+    pri = [<span class="hljs-number">0</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">7</span>,<span class="hljs-number">11</span>,<span class="hljs-number">13</span>,<span class="hljs-number">17</span>,<span class="hljs-number">19</span>,<span class="hljs-number">23</span>]
+    row = [<span class="hljs-number">1</span>]*<span class="hljs-number">9</span>
+    col = [<span class="hljs-number">1</span>]*<span class="hljs-number">9</span>
+    cen = [<span class="hljs-number">1</span>]*<span class="hljs-number">9</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">9</span>):
+        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(<span class="hljs-number">9</span>):
+            c = pri[x[i][j]]
+            <span class="hljs-keyword">if</span> c == <span class="hljs-number">0</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+            index = (i//<span class="hljs-number">3</span>)*<span class="hljs-number">3</span> + j//<span class="hljs-number">3</span>
+            row[i] *= c
+            col[j] *= c
+            cen[index] *= c
+            c = c*c
+            <span class="hljs-keyword">if</span> (row[i]%c)*(col[j]%c)*(cen[index]%c) == <span class="hljs-number">0</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
+</div></code></pre>
+<p>第五题： 疯狂的彩色三角形</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">triangle</span><span class="hljs-params">(row)</span>:</span>
+    row = [char <span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> row]
+    lenght = len(row)
+    new_my_dict = {<span class="hljs-string">"RR"</span>: <span class="hljs-string">"R"</span>, <span class="hljs-string">"BB"</span>: <span class="hljs-string">"B"</span>, <span class="hljs-string">"GG"</span>: <span class="hljs-string">"G"</span>, <span class="hljs-string">"RG"</span>: <span class="hljs-string">"B"</span>, <span class="hljs-string">"GR"</span>: <span class="hljs-string">"B"</span>, <span class="hljs-string">"RB"</span>: <span class="hljs-string">"G"</span>, <span class="hljs-string">"BR"</span>: <span class="hljs-string">"G"</span>, <span class="hljs-string">"BG"</span>: <span class="hljs-string">"R"</span>, <span class="hljs-string">"GB"</span>: <span class="hljs-string">"R"</span>}
+    <span class="hljs-keyword">while</span> lenght &gt; <span class="hljs-number">9</span>:
+        <span class="hljs-keyword">if</span> (lenght - <span class="hljs-number">1</span>) % <span class="hljs-number">9</span> != <span class="hljs-number">0</span>:
+            <span class="hljs-keyword">while</span> (lenght - <span class="hljs-number">1</span>) % <span class="hljs-number">9</span> != <span class="hljs-number">0</span>:
+                <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(row) - <span class="hljs-number">1</span>):
+                row[i] = new_my_dict[row[i] + row[i + <span class="hljs-number">1</span>]]
+                row.pop()
+                lenght -= <span class="hljs-number">1</span>
+                temp = []
+            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, lenght - <span class="hljs-number">1</span>, <span class="hljs-number">9</span>):
+            temp.append(new_my_dict[row[i] + row[i + <span class="hljs-number">9</span>]])
+        row = temp
+        lenght = (lenght - <span class="hljs-number">1</span>) // <span class="hljs-number">9</span>       
+    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(lenght - <span class="hljs-number">1</span>):
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(row) - <span class="hljs-number">1</span>): row[i] = new_my_dict[row[i] + row[i + <span class="hljs-number">1</span>]]
+           row.pop()
+    <span class="hljs-keyword">return</span> row[<span class="hljs-number">0</span>]
+</div></code></pre>
+<h2 id="%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86-%E4%BD%BF%E7%94%A8mermaid%E7%BB%98%E5%88%B6%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B%E5%9B%BE">第二部分 使用Mermaid绘制程序流程图</h2>
+<p>第一题：停止逆转我的单词</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+A[output]
+B[for word in sentence.split ' ']
+C{len word > 4}
+D[ return ' '.join output]
+E[word = word ::-1]
+F[END]
+G[output.append word]
+A-->B
+B-->C
+B--|END FOR|-->D
+C--|YES|-->E
+C--|NO|-->G
+E-->G
+G-->B
+D-->F
+
+</div></code></pre>
+<p>第二题：发现离群的数(Find The Parity Outlier)</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+A[evens = odds =]
+B[for each in integers]
+C{if each%2==0}
+D[evens.append each]
+E[odds.append each]
+F{len evens>1 and lenodds==1}
+G[return odds 0]
+H{ lenodds>1 and len evens==1}
+I[return evens 0]
+J[END]
+A-->B
+B-->C
+B--|END FOR|-->J
+C--|YES|-->D
+C--|NO|-->E
+D-->F
+E-->F
+F--|YES|-->G
+F--|NO|-->H
+G-->J
+H--|YES|-->I
+H--|NO|-->B
+</div></code></pre>
+<p>第三题：检测Pangram</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+A[alphabet = 'abcdefghijklmnopqrstuvwhyz' ]
+B[for letter in alphabet]
+C{letter not in string.lower}
+D[ return False]
+E[ return True]
+F[END]
+A-->B
+B-->C
+C--|NO|-->B
+C--|YES|-->D
+D-->F
+B--|END FOR|-->E
+E-->F
+
+</div></code></pre>
+<p>第四题：数独解决方案验证</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+A[pri = 0,2,3,5,7,11,13,17,19,23]
+B[for i in range 9]
+C[ for j in range 9]
+D[c = pri x ij]
+E{c == 0}
+F[ index = i//3*3 + j//3
+            row i *= c
+            col j *= c
+            cen index *= c
+            c = c*c]
+G[return False]
+H{ rowi%c*col j %c*cen index%c == 0}
+I[return False]
+J[return True]
+K[END]
+A-->B
+B-->C
+C--|END FOR|-->B
+B--|END FOR|-->J
+C-->D
+D-->E
+E--|YES|-->G
+E--|NO|-->F
+F-->H
+H--|YES|-->I
+I-->K
+G-->K
+J-->K
+</div></code></pre>
+<p>第五题：疯狂的彩色三角形</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+A[row = char for char in row lenght = len row
+new_my_dict ]
+B{lenght > 9}
+C{lenght - 1 % 9 != 0}
+D[ _ in range lenght - 1]
+E{lenght - 1 % 9 != 0}
+F[i in range len row - 1]
+G[return row 0]
+H[for i in range len row - 1]
+I[temp = ]
+J[row i = new_my_dictrow i + row i + 1]
+K[row.pop]
+L[END]
+M[row i = new_my_dictrow i + row i + 1]
+N[row.pop lenght -= 1]
+O[for i in range 0, lenght - 1, 9]
+P[temp.appendnew_my_dict row i + row i + 9]
+Q[row = temp lenght = lenght - 1 // 9]
+A-->B
+B--|YES|-->C
+B--|NO|-->D
+C--|YES|-->E
+C--|NO|-->I
+D-->F
+D-->G
+E--|YES|-->H
+E--|NO|-->I
+F-->G
+F--|END FOR|-->K
+G-->L
+H-->M
+H--|END FOR|-->N
+I-->O
+J-->F
+K-->D
+M-->H
+N--E
+O-->P
+O--|END FOR|-->Q
+Q-->B
+
+</div></code></pre>
+<p><strong>注意：不要使用截图，因为Markdown文档转换为Pdf格式后，截图会无法显示。</strong></p>
+<h2 id="%E5%AE%9E%E9%AA%8C%E8%80%83%E6%9F%A5">实验考查</h2>
+<p>请使用自己的语言并使用尽量简短代码示例回答下面的问题，这些问题将在实验检查时用于提问和答辩以及实际的操作。</p>
+<ol>
+<li>
+<p>集合（set）类型有什么特点？它和列表（list）类型有什么区别？</p>
+<p>答：集合（set）类型是一种无序的、不重复的数据结构，它的特点是：
+集合中的元素是唯一的，不会重复出现。
+集合中的元素是无序的，不能通过下标来访问集合中的元素。
+列表（list）类型是一种有序的、可重复的数据结构，它的特点是：
+列表中的元素是有序的，可以通过下标来访问列表中的元素。
+列表中的元素是可重复的，同一个元素可以出现多次。
+因此，集合和列表在存储数据和访问数据的方式上有很大的区别。</p>
+</li>
+<li>
+<p>集合（set）类型主要有那些操作？</p>
+<p>答：1.初始化一个集合：可以使用{}或者set()函数来初始化一个集合。
+2.集合的运算操作：包括并集（|）、交集（&amp;）、差集（-）和对称差集（^）。
+3.集合的基本方法：包括add()、remove()、discard()、pop()、clear()等方法。
+4.集合的比较操作：包括issubset()、issuperset()、isdisjoint()等方法。
+5.集合的其他操作：包括len()、in、not in等操作。</p>
+</li>
+<li>
+<p>使用<code>*</code>操作符作用到列表上会产生什么效果？为什么不能使用<code>*</code>操作符作用到嵌套的列表上？使用简单的代码示例说明。</p>
+<p>答：使用<em>操作符作用到列表上会将列表中的元素解包，变成函数参数传递给函数。例如，可以使用</em>操作符将列表中的元素传递给函数作为位置参数，或者将字典中的键传递给函数作为关键字参数。但是，不能使用*操作符作用到嵌套的列表上，因为这样会导致解包出来的元素无法正确地传递给函数。
+以下是一个简单的代码示例：</p>
+</li>
+</ol>
+<pre class="hljs"><code><div>           <span class="hljs-comment"># 使用 * 操作符将列表中的元素传递给函数</span>
+       <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">my_func</span><span class="hljs-params">(a, b, c)</span>:</span>
+           print(a, b, c)
+
+       my_list = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+       my_func(*my_list)  <span class="hljs-comment"># 输出：1 2 3</span>
+
+           <span class="hljs-comment"># 不能使用 * 操作符将嵌套的列表传递给函数</span>
+       nested_list = [[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]]
+       my_func(*nested_list)  <span class="hljs-comment"># 报错：TypeError: my_func() takes 3 positional arguments but 4 were given</span>
+</div></code></pre>
+<ol start="5">
+<li>
+<p>总结列表,集合，字典的解析（comprehension）的使用方法。使用简单的代码示例说明。</p>
+<p>答：列表解析（List Comprehension）是一种简洁的创建列表的方法，它可以通过一个表达式和一个可迭代对象来创建一个新的列表。下面是一个简单的示例代码：</p>
+</li>
+</ol>
+<pre class="hljs"><code><div>         <span class="hljs-comment"># 创建一个包含1到10的平方数的列表</span>
+         squares = [x**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>)]
+         print(squares)
+</div></code></pre>
+<p>输出结果为：[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+集合解析（Set Comprehension）与列表解析类似，只不过它创建的是一个集合。下面是一个简单的示例代码：</p>
+<pre class="hljs"><code><div>      <span class="hljs-comment"># 创建一个包含1到10的平方数的集合</span>
+        squares_set = {x**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>)}
+        print(squares_set)
+</div></code></pre>
+<p>输出结果为：{64, 1, 4, 36, 100, 9, 16, 49, 81, 25}
+字典解析（Dictionary Comprehension）是一种创建字典的方法，它可以通过一个表达式和一个可迭代对象来创建一个新的字典。下面是一个简单的示例代码：</p>
+<pre class="hljs"><code><div>      <span class="hljs-comment"># 创建一个包含1到10的平方数的字典</span>
+        squares_dict = {x: x**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>)}
+        print(squares_dict)
+</div></code></pre>
+<p>输出结果为：{1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100}</p>
+<h2 id="%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93">实验总结</h2>
+<p>这次学习了python中的数据结构和数据模型，学会了使用集合和列表，也明白了集合和列表之间的区别，集合中的元素是唯一的，不会重复出现。 集合中的元素是无序的，不能通过下标来访问集合中的元素。</p>
+
+</body>
+</html>

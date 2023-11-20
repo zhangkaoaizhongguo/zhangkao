@@ -364,9 +364,57 @@ def count_developers(lst):
     return n_d 
 ```
 
-第二题： 使用函数进行计算(Calculating with Functions)
+第二题：使用函数进行计算(Calculating with Functions)
 
 ```python
+def zero(operation=None):
+    return operation(0) if operation else 0
+
+def one(operation=None):
+    return operation(1) if operation else 1
+
+def two(operation=None):
+    return operation(2) if operation else 2
+
+def three(operation=None):
+    return operation(3) if operation else 3
+
+def four(operation=None):
+    return operation(4) if operation else 4
+
+def five(operation=None):
+    return operation(5) if operation else 5
+
+def six(operation=None):
+    return operation(6) if operation else 6
+
+def seven(operation=None):
+    return operation(7) if operation else 7
+
+def eight(operation=None):
+    return operation(8) if operation else 8
+
+def nine(operation=None):
+    return operation(9) if operation else 9
+
+def plus(y):
+    return lambda x: x + y
+
+def minus(y):
+    return lambda x: x - y
+
+def times(y):
+    return lambda x: x * y
+
+def dividedBy(y):
+    return lambda x: x // y
+
+result1 = seven(times(five()))  # 应返回 35
+result2 = four(plus(nine()))    # 应返回 13
+result3 = eight(minus(three()))  # 应返回 5
+result4 = six(dividedBy(two()))  # 应返回 3
+
+print(result1, result2, result3, result4)
 
 ```
 
@@ -425,6 +473,21 @@ def curry_partial(f, *initial_args):
 
 ```mermaid
 flowchart LR
+A[n_d = 0 ]
+B[for word in sentence.split ' ']
+C{len word > 4}
+D[ return ' '.join output]
+E[word = word ::-1]
+F[END]
+G[output.append word]
+A-->B
+B-->C
+B--|END FOR|-->D
+C--|YES|-->E
+C--|NO|-->G
+E-->G
+G-->B
+D-->F
 
 ```
 
@@ -432,6 +495,30 @@ flowchart LR
 
 ```mermaid
 flowchart LR
+ A[开始] -->|接受参数a| B[定义identity函数]
+B -->|返回a| C[返回a]
+A -->|接受可选参数f默认为identity| D[定义zero函数]
+D -->|使用f对0进行操作| E[调用f0]
+E --> F[返回结果]
+D --> F
+A --> G[定义one函数]
+G -->|使用f对1进行操作| H[调用f1]
+H --> I[返回结果]
+G --> I
+F --> J[结束]
+I --> J
+J --> K[定义plus函数]
+K -->|接受参数b| L[返回lambda函数: lambda a: a + b]
+J --> L
+K --> M[定义minus函数]
+M -->|接受参数b| N[返回lambda函数: lambda a: a - b]
+J --> N
+K --> O[定义times函数]
+O -->|接受参数b| P[返回lambda函数: lambda a: a * b]
+J --> P
+K --> Q[定义divided_by函数]
+Q -->|接受参数b| R[返回lambda函数: lambda a: a // b]
+J --> R
 
 ```
 
@@ -439,6 +526,21 @@ flowchart LR
 
 ```mermaid
 flowchart LR
+
+  A[开始] -->|接受suffixes和base参数| B[定义filter_function]
+  B -->|接受数字参数x| C{能否将x转换为整数?}
+  C -->|是| D[将x转换为整数]
+  C -->|否| E[返回字符串x]
+  D --> F[初始化index为0]
+  F -->|x是否大于等于base且index小于suffixes长度减1| G{条件满足吗?}
+  G -->|是| H[递增index]
+  G -->|否| I[计算x除以base并更新x]
+  H --> F  
+  I --> G  
+  G -->|条件不再满足| J[返回strx + suffixesindex]
+  J --> K[结束]
+
+ 
 
 
 ```
@@ -448,12 +550,39 @@ flowchart LR
 ```mermaid
 flowchart LR
 
+  A[开始] -->|接受包含字典的列表lst| B{找到最高年龄mage}
+  B -->|使用生成器表达式找到所有年龄| C[生成器表达式: a'age' for a in lst]
+  C --> D[使用max函数找到最大值mage]
+  D -->|使用列表推导式找到最高年龄的字典| E[列表推导式: a for a in lst if a'age' == mage]
+  E --> F[返回包含最高年龄的字典的列表]
+  F --> G[结束]
+
 ```
 
 第五题：Currying versus partial application
 
 ```mermaid
 flowchart LR
+A[开始]
+B{f是否可调用?}
+C[获取函数f的参数个数n]
+E[返回f]
+D[返回f被初始参数部分应用后的结果]
+F[创建部分应用的函数g]
+G[定义递归函数h]
+H[返回递归函数h]
+I[结束]
+A -->|initial_args| B
+B --|yes|-->C
+B --|no|-->E
+C -->|n <= args| D
+C -->|n >args| F
+F --> G
+G --|curry_partial|--> B
+F -->H
+D --> H
+E --> H
+H --> I
 
 
 ```
@@ -468,6 +597,81 @@ flowchart LR
 2. 什么是lambda函数？请举例说明。
 3. 什么是高阶函数？常用的高阶函数有哪些？这些高阶函数如何工作？使用简单的代码示例说明。
 
+## 我的回答
+
+1. 函数式编程范式是一种编程范式，它将计算视为数学函数的计算，避免使用可变的数据和状态。函数式编程强调函数的纯粹性和不可变性，并且通常采用一系列数学概念，如高阶函数、递归、lambda演算等。
+以下是函数式编程范式的一些主要特点：
+  纯函数： 纯函数是指函数的输出完全由输入决定，而且函数执行过程中没有副作用。相同的输入始终产生相同的输出，不依赖外部状态，不改变全局状态。
+  不可变性： 函数式编程强调数据的不可变性，即一旦数据被创建，就不能被修改。如果需要对数据进行更改，应该创建一个新的数据副本而不是修改原始数据。
+  高阶函数： 函数可以作为参数传递给其他函数，也可以作为返回值。高阶函数是函数式编程的一个关键概念，它使得编程变得更加抽象和灵活。
+  递归： 函数式编程通常使用递归而不是循环来进行迭代。递归是一种自我引用的方法，它可以用于解决许多问题，并与函数式编程的不可变性和纯函数性相契合。
+  引用透明性： 表示一个表达式可以被它的值替代而不改变程序的行为。这使得程序更容易理解和推理，因为函数调用不依赖于外部状态。
+  惰性求值： 只有在需要的时候才计算表达式的值。这有助于提高程序的性能，因为只有在真正需要结果时才进行计算。
+  模块化： 函数式编程鼓励将程序分解为小的、可重用的函数，这有助于构建模块化和易于维护的代码。
+   函数式编程范式的一些编程语言，以及在一定程度上支持函数式编程的语言，如JavaScript和Python，都在不同程度上应用了这些特点。函数式编程的优点包括代码简洁、易于理解、并行化的便利性等。然而，它也可能需要程序员适应一些与传统命令式编程不同的思维方式。
+
+2. Lambda函数是一种匿名函数，也称为lambda表达式。它是一种在编程中创建小型、临时的、一次性的函数的方式，通常用于需要传递函数作为参数的情况。
+在许多编程语言中，lambda函数通常只有一行，用于执行简单的操作。Lambda函数的语法通常包括关键字lambda，参数列表，冒号(:)，以及函数体。下面是一个简单的lambda函数的通用形式：
+
+```python
+# 使用lambda定义一个匿名函数，计算两个数的和
+add = lambda x, y: x + y
+
+# 调用lambda函数
+result = add(3, 5)
+
+# 输出结果
+print(result)  # 输出 8
+
+```
+
+在这个例子中，lambda函数接受两个参数 x 和 y，并返回它们的和。lambda函数赋值给变量 add，然后可以像普通函数一样调用。这里，add(3, 5) 返回 8。
+ambda函数通常用于函数式编程中的高阶函数，例如在 map、filter、sorted 等函数中作为参数传递。以下是一个使用lambda函数的例子：
+
+```python
+# 使用lambda函数将列表中的每个元素平方
+numbers = [1, 2, 3, 4, 5]
+squared_numbers = list(map(lambda x: x**2, numbers))
+
+# 输出结果
+print(squared_numbers)  # 输出 [1, 4, 9, 16, 25]
+
+```
+
+在这个例子中，map 函数将lambda函数应用于列表中的每个元素，将每个元素平方，最终得到 squared_numbers 列表。
+
+3. 高阶函数是指可以接受一个或多个函数作为参数，并/或者返回一个函数作为结果的函数。在函数式编程中，高阶函数是一种强大的工具，它们可以用来抽象通用的模式，使代码更加简洁和灵活。常用的高阶函数包括 map、filter、reduce 等。
+
+```python
+from functools import reduce
+
+# 使用reduce函数计算列表中所有元素的累积和
+numbers = [1, 2, 3, 4, 5]
+sum_result = reduce(lambda x, y: x + y, numbers)
+# 输出结果：15
+
+```
+
+```python
+# 使用sorted函数对列表进行升序排序
+numbers = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+sorted_numbers = sorted(numbers)
+# 输出结果：[1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
+
+```
+
+这些高阶函数通常通过将函数作为参数传递给它们来工作，或者返回一个函数作为结果。这种方式允许我们更灵活地操作数据，通过传递不同的函数实现不同的逻辑。
+使用高阶函数的优点之一是可以将代码编写得更简洁，通过传递函数作为参数，可以提高代码的可读性和复用性。
+
 ## 实验总结
 
-总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。
+在这次实验中，我提供了关于函数式编程的解释，包括函数式编程范式的特点、lambda函数的概念以及高阶函数的介绍。同时，我还强调了函数式编程中纯函数、不可变性等重要概念。与之前提到的总结相比，这里强调了一些不同的方面：
+  函数式编程范式的突出：
+重点强调了函数式编程范式的核心特点，如纯函数、不可变性等，突显了它与传统命令式编程的区别。
+  突出函数式编程的思想：
+更强调了函数式编程的思想，包括通过纯函数和不可变性来减少副作用，以及利用高阶函数实现模块化和灵活的代码结构。
+  数据结构和算法的强调：
+虽然在具体示例中没有涉及复杂的数据结构和算法，但函数式编程通常与一些特定的数据结构（如不可变数据结构）和算法（如尾递归）相关联。
+  与传统编程范式的对比：
+强调了函数式编程与传统命令式编程的区别，特别是在对待状态和数据的方式上，更加注重不可变性和函数的纯粹性。
+  总体而言，这次总结更加突出了函数式编程范式的独特性和思想，以及它与传统编程方式的差异。这样的总结有助于理解函数式编程的核心概念，并对编写更清晰、易于维护的代码有更深层次的认识。
